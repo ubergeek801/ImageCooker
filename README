@@ -1,0 +1,91 @@
+ImageCooker
+open source utilities for raw image processing
+
+README
+
+ImageCooker is a set of open source utilities for manipulating raw
+images from digital cameras (currently Minolta DiMAGE cameras, though
+support should expand eventually). These are certainly not the only raw
+processing utilities available, nor are they even the only such open
+source utilities available, but they may prove to be useful somehow. The
+utilities are distributed under the terms of the GNU General Public
+License; for details refer to http://www.gnu.org/copyleft/gpl.html. For
+the most up-to-date information on ImageCooker, see
+http://www.ivydesign.com/ImageCooker/ or contact the author, Jeremy
+Rosenberger, at jlr4@cornell.edu.
+
+Build, Install and Usage Notes:
+
+ImageCooker is currently known to compile and run on Red Hat Linux 7.3
+and Red Hat Linux 8.0, using gcc 2.96 and gcc 3.2. However, as the
+utilities are written in pretty much standard C++, they should be able
+to compile using any reasonable C++ compiler. The accompanying GIMP
+plugin is known to work with GIMP 1.2.3. The interpolation itself will
+take advantage of multiprocessors (using POSIX Threads); this has been
+tested on single- and dual-CPU Linux machines.
+
+ImageCooker requires a few things in order to compile. Some components
+are optional, but to avoid compiling a component, it is currently
+necessary to edit the Makefile accordingly. The requirements are as
+follows.
+    * A POSIX Threads library (e.g. pthreads on Linux). Currently it's
+      not possible to compile without this, even for a single-CPU setup.
+    * GIMP and glib header files and libraries. These are only
+      necessary to compile the GIMP plugin.
+    * libtiff (http://www.libtiff.org/) header files and libraries.
+      These are only necessary to compile mrw2tiff.
+
+To compile ImageCooker, edit the Makefile as necessary (include
+directories and compiler flags may need to be changed) and then type
+"make". If there are any errors (or even warnings, for that matter),
+please let me know about them. Or if you want to contribute a nifty
+automake-style script, feel free :-)
+
+To install, copy the binaries (mrwinfo, mrw2ppm, mrw2tiff, etc.) to an
+appropriate directory such as /usr/local/bin. Copy the GIMP plugin to
+one of your GIMP plugins directories, which may be
+/usr/lib/gimp/1.2/plug-ins or ~/.gimp-1.2/plug-ins, or some other
+location, depending on your preference.
+
+The command-line interpolation utilities (mrw2ppm and mrw2tiff) require
+three arguments: the name of the MRW file to be interpolated, the name
+of the output (PPM or TIFF) file, and the name of the interpolator to be
+used. Currently the recognized interpolator names are as follows.
+
+Trivial interpolators:
+    * None
+      No interpolation is performed; each pixel in the output image will
+      have only a red, green or blue component, which is the way the
+      camera's sensor "sees" images. This is probably only useful for
+      academic purposes, as it generates terrible images. :-)
+    * No
+      Synonym for "None".
+
+Interpolation algorithms described in Ting Chen's Study of Spatial Color
+Interpolation Algorithms for Single-Detector Digital Cameras
+(http://www-ise.stanford.edu/~tingchen/), ranging roughly from "worst"
+to "best":
+    * NearestNeighbor
+    * Bilinear
+    * SmoothHueTransition
+    * SmoothHueTransitionLog
+    * EdgeSensing1
+    * EdgeSensing2
+    * PatternRecognition
+    * ColorCorrection1
+    * VariableGradients
+    * PixelGrouping
+
+In some cases these names are abbreviated versions of those presented in
+Chen's work, but it should be obvious which algorithms they refer to.
+Chen considers VariableGradients to produce the best results, although
+the measured error is very similar between VariableGradients and
+ColorCorrection1. I personally can't distinguish between the results of
+the two, but ColorCorrection1 is much faster. In any case, the newcomer
+PixelGrouping edges them both out, and is the default for the GIMP
+plugin.
+
+Well, that's all I can think of for this README. Good luck and have fun!
+
+Jeremy Rosenberger
+jlr4@cornell.edu
