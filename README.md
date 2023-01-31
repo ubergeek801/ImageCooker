@@ -3,7 +3,7 @@ ImageCooker is a set of open source utilities for processing "raw" image files f
 
 ImageCooker's "front end" is based on the defunct Minolta MRW format, which is not likely to be useful to too many people anymore. However, its processing engine was designed to facilitate developing new "de-mosaic" algorithms, and it has indeed been used for this purpose by a handful of researchers who stumbled upon this project.
 
-I'm not going to lie; ImageCooker hasn't really been actively maintained since 2003. But since I still enounter the occasional individual that finds it useful, I decided that rather than living as a ZIP file on an obscure Web site somewhere, it would find a better home on GitHub. And since I'm now in possession of a Fuji camera eqiupped with an "X-Trans" sensor, an X-Trans version of ImageCooker may eventually come along (but no promises!).
+I'm not going to lie; ImageCooker hasn't really been actively maintained since 2003. But since I still encounter the occasional individual that finds it useful, I decided that rather than living as a ZIP file on an obscure Web site somewhere, it would find a better home on GitHub. And since I'm now in possession of a Fuji camera eqiupped with an "X-Trans" sensor, an X-Trans version of ImageCooker may eventually come along (but no promises!).
 
 ## ImageCooker utilities
 Currently there are four utilities for use with Minolta Raw (MRW) files:
@@ -17,7 +17,7 @@ In addition, there are two utilities that perform Bayer-related operations on PP
 * `bayer2tiff`: performs Bayer interpolation on a PPM file, treating the image as if it came from a Bayer sensor, and writes the output in TIFF format
 
 ## Why another raw processor?
-Even in 2003, there was no shortage of existing apps, even in the open source world, to handle raw images. Many of them were even more full-featured. But I had a few specific goals in mind when deevloping ImageCooker. I wanted to
+Even in 2003, there was no shortage of existing apps, even in the open source world, to handle raw images. Many of them were even more full-featured. But I had a few specific goals in mind when developing ImageCooker. I wanted to
 * learn the ins and outs of writing certain categories of software that I haven't dabbled in before: GIMP plugins and processing of device-specific output files;
 * play around with (by implementing myself) different Bayer interpolation algorithms; and
 * produce such a set of utilities with the explicit goal of producing source code that is well-documented enough to be understandable to others (at least to others with knowledge of C++ and/or object-oriented programming).
